@@ -21,8 +21,7 @@ public class UsuarioModel {
     private String lastName;
     private String photoUrl;
     private String dateOfBirth;
-    private String sexo;
-    private String homeAddress;
+
     private int phoneNumber;
     private Boolean loginStatus;
 
@@ -30,15 +29,14 @@ public class UsuarioModel {
     }
 
     public UsuarioModel(String emailAddress, String password, String name, String lastName, String photoUrl,
-            String dateOfBirth, String sexo, String homeAddress, int phoneNumber, Boolean loginStatus) {
+            String dateOfBirth, int phoneNumber, Boolean loginStatus) {
         this.emailAddress = emailAddress;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.photoUrl = photoUrl;
         this.dateOfBirth = dateOfBirth;
-        this.sexo = sexo;
-        this.homeAddress = homeAddress;
+
         this.phoneNumber = phoneNumber;
         this.loginStatus = loginStatus;
     }
@@ -97,22 +95,6 @@ public class UsuarioModel {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
     }
 
     public int getPhoneNumber() {

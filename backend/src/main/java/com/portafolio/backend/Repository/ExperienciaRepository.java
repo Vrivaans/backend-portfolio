@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExperienciaRepository extends JpaRepository<ExperienciaModel, Long> {
-    
+
 }

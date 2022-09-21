@@ -52,8 +52,7 @@ public class AppRestController {
             @RequestParam("lastaName") String newLastName,
             @RequestParam("photoUrl") String newPhotoUrl,
             @RequestParam("dateOfBirth") String newDateOfBirth,
-            @RequestParam("sexo") String newSexo,
-            @RequestParam("homeAddress") String newHomeAddress,
+
             @RequestParam("phoneNumber") int newPhoneNumber,
             @RequestParam("loginStatus") String newLoginStatus) {
         // Para buscar el usuario
@@ -64,8 +63,7 @@ public class AppRestController {
         user.setLastName(newLastName);
         user.setPhotoUrl(newPhotoUrl);
         user.setDateOfBirth(newDateOfBirth);
-        user.setSexo(newSexo);
-        user.setHomeAddress(newHomeAddress);
+
         user.setPhoneNumber(newPhoneNumber);
 
         return user;
