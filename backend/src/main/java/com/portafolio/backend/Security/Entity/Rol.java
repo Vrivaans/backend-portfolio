@@ -1,5 +1,11 @@
-package com.portafolio.Security.Entity;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.portafolio.backend.Security.Entity;
 
+import com.portafolio.backend.Security.Enums.RolNombre;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,13 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import com.portafolio.Security.Enums.RolNombre;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 public class Rol {
     @Id
@@ -24,11 +23,22 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
 
+    // Constructor
     public Rol() {
     }
 
     public Rol(RolNombre rolNombre) {
         this.rolNombre = rolNombre;
+    }
+
+    // Getter y Setter
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public RolNombre getRolNombre() {
@@ -39,11 +49,4 @@ public class Rol {
         this.rolNombre = rolNombre;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

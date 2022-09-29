@@ -1,20 +1,22 @@
-package com.portafolio.Security.Controller;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.portafolio.backend.Security.Controller;
 
+import com.portafolio.backend.Security.Dto.JwtDto;
+import com.portafolio.backend.Security.Dto.LoginUsuario;
+import com.portafolio.backend.Security.Dto.NuevoUsuario;
+import com.portafolio.backend.Security.Entity.Rol;
+import com.portafolio.backend.Security.Entity.Usuario;
+import com.portafolio.backend.Security.Enums.RolNombre;
+import com.portafolio.backend.Security.Service.RolService;
+import com.portafolio.backend.Security.Service.UsuarioService;
+import com.portafolio.backend.Security.jwt.JwtProvider;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.validation.Valid;
-
-import com.portafolio.Security.Dto.JwtDto;
-import com.portafolio.Security.Dto.LoginUsuario;
-import com.portafolio.Security.Dto.NuevoUsuario;
-import com.portafolio.Security.Entity.Rol;
-import com.portafolio.Security.Entity.User;
-import com.portafolio.Security.Enums.RolNombre;
-import com.portafolio.Security.JWT.JWTProvider;
-import com.portafolio.Security.Services.RolService;
-import com.portafolio.Security.Services.UserServices;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,40 +33,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.jsonwebtoken.Jwt;
-
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+// @CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://mgbfrontend.web.app")
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
-
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
-    UserServices userServices;
-
+    UsuarioService usuarioService;
     @Autowired
     RolService rolService;
-
     @Autowired
-    JWTProvider jwtProvider;
+    JwtProvider jwtProvider;
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Campos mal puestos o email invalido"), HttpStatus.BAD_REQUEST);
 
-        if (userServices.existsByUserName(nuevoUsuario.getNombreUsuario()))
+        if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity(new Mensaje("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
 
-        if (userServices.existsByEmail(nuevoUsuario.getEmail()))
-
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
 
-        User user = new User(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
+        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
                 nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
@@ -72,8 +68,8 @@ public class AuthController {
 
         if (nuevoUsuario.getRoles().contains("admin"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
-        user.setRoles(roles);
-        userServices.save(user);
+        usuario.setRoles(roles);
+        usuarioService.save(usuario);
 
         return new ResponseEntity(new Mensaje("Usuario guardado"), HttpStatus.CREATED);
     }
@@ -83,8 +79,8 @@ public class AuthController {
         if (bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -93,6 +89,7 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 

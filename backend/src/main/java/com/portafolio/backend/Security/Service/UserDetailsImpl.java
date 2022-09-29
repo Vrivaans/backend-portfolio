@@ -1,8 +1,12 @@
-package com.portafolio.Security.Services;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.portafolio.backend.Security.Service;
 
-import com.portafolio.Security.Entity.MainUser;
-import com.portafolio.Security.Entity.User;
-
+import com.portafolio.backend.Security.Entity.Usuario;
+import com.portafolio.backend.Security.Entity.UsuarioPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,15 +15,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsImpl implements UserDetailsService {
-
     @Autowired
-    UserServices userServices;
+    UsuarioService usuarioService;
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-
-        User user = userServices.getByNombreUsuario(nombreUsuario).get();
-        return MainUser.build(user);
+        Usuario usuario = usuarioService.getByNombreUsuario(nombreUsuario).get();
+        return UsuarioPrincipal.build(usuario);
     }
 
 }

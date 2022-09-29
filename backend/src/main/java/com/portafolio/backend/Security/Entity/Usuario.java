@@ -1,4 +1,9 @@
-package com.portafolio.Security.Entity;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.portafolio.backend.Security.Entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-
-public class User {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -34,17 +38,17 @@ public class User {
 
     // Constructores
 
-    public User() {
+    public Usuario() {
     }
 
-    public User(String nombre, String nombreUsuario, String email, String password) {
+    public Usuario(String nombre, String nombreUsuario, String email, String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
     }
 
-    // Getters y Setters
+    // Getter Y Setter
 
     public int getId() {
         return id;
