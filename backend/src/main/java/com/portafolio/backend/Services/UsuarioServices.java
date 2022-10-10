@@ -2,6 +2,8 @@ package com.portafolio.backend.Services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
 import com.portafolio.backend.Models.HabilidadesModel;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class UsuarioServices implements IUsuarioServices {
 
     @Autowired
@@ -29,11 +32,11 @@ public class UsuarioServices implements IUsuarioServices {
     @Autowired
     private ExperienciaRepository experienciaRepository;
 
-    @Override
-    public List<UsuarioModel> getUsers() {
-        List<UsuarioModel> listaUsers = userRepository.findAll();
-        return listaUsers;
-    }
+    // @Override
+    // public List<UsuarioModel> getUsers() {
+    // List<UsuarioModel> listaUsers = userRepository.findAll();
+    // return listaUsers;
+    // }
 
     @Override
     public void savePersona(UsuarioModel user) {
@@ -42,13 +45,13 @@ public class UsuarioServices implements IUsuarioServices {
     }
 
     @Override
-    public void deletePersona(int id) {
+    public void deletePersona(Long id) {
         userRepository.deleteById((long) id);
 
     }
 
     @Override
-    public UsuarioModel findUser(int id) {
+    public UsuarioModel findUser(Long id) {
         UsuarioModel user = userRepository.findById((long) id).orElse(null);
         return user;
     }
@@ -67,12 +70,12 @@ public class UsuarioServices implements IUsuarioServices {
 
     @Override
     public void removeExperience(int id) {
-        experienciaRepository.deleteById((long) id);
+        experienciaRepository.deleteById(id);
     }
 
     @Override
     public ExperienciaModel findExperiencie(int id) {
-        ExperienciaModel experience = experienciaRepository.findById((long) id).orElse(null);
+        ExperienciaModel experience = experienciaRepository.findById(id).orElse(null);
         return experience;
     }
 
@@ -90,12 +93,12 @@ public class UsuarioServices implements IUsuarioServices {
 
     @Override
     public void removeEducacion(int id) {
-        educacionRepository.deleteById((long) id);
+        educacionRepository.deleteById(id);
     }
 
     @Override
     public EducacionModel findEducacion(int id) {
-        EducacionModel educacion = educacionRepository.findById((long) id).orElse(null);
+        EducacionModel educacion = educacionRepository.findById(id).orElse(null);
         return educacion;
     }
 
@@ -113,12 +116,12 @@ public class UsuarioServices implements IUsuarioServices {
 
     @Override
     public void removeHabilidad(int id) {
-        habilidadRepository.deleteById((long) id);
+        habilidadRepository.deleteById(id);
     }
 
     @Override
     public HabilidadesModel findHabilidad(int id) {
-        HabilidadesModel habilidad = habilidadRepository.findById((long) id).orElse(null);
+        HabilidadesModel habilidad = habilidadRepository.findById(id).orElse(null);
         return habilidad;
     }
 

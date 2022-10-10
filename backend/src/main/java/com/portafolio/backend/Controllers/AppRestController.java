@@ -9,6 +9,7 @@ import com.portafolio.backend.Models.UsuarioModel;
 import com.portafolio.backend.Services.IUsuarioServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,53 +20,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AppRestController {
 
     @Autowired
     private IUsuarioServices interfaceService;
 
     @GetMapping("/traer/usuario")
-    public List<UsuarioModel> getUsers() {
-        return interfaceService.getUsers();
+    public UsuarioModel findUser() {
+        return interfaceService.findUser((long) 1);
     }
+
+    // @GetMapping("/traer/usuario")
+    // public List<UsuarioModel> getUsers() {
+    // return interfaceService.getUsers();
+    // }
 
     @PostMapping("/crear/usuario")
     public String crearUsuario(@RequestBody UsuarioModel user) {
-        if (interfaceService.findUser(1) == null) {
+        if (interfaceService.findUser((long) 1) == null) {
             interfaceService.savePersona(user);
             return "La persona fué creado correctamente";
         }
         return "La persona ya existe";
     }
 
-    @DeleteMapping("/persona/borrar/{id}")
-    public String deletePersona(int id) {
+    @DeleteMapping("/usuario/borrar/{id}")
+    public String deletePersona(Long id) {
         interfaceService.deletePersona(id);
         return "Se eliminó correctamente";
     }
 
-    @PutMapping("/personas/editar/{id}")
+    @PutMapping("/usuario/editar/{id}")
     public UsuarioModel editPersona(@PathVariable int id,
-            @RequestParam("emailAddress") String newEmailAddress,
-            @RequestParam("password") String newPassword,
             @RequestParam("name") String newName,
             @RequestParam("lastaName") String newLastName,
             @RequestParam("photoUrl") String newPhotoUrl,
-            @RequestParam("dateOfBirth") String newDateOfBirth,
-
-            @RequestParam("phoneNumber") int newPhoneNumber,
-            @RequestParam("loginStatus") String newLoginStatus) {
+            @RequestParam("dateOfBirth") String newDateOfBirth) {
         // Para buscar el usuario
-        UsuarioModel user = interfaceService.findUser(id);
-        user.setEmailAddress(newEmailAddress);
-        user.setPassword(newPassword);
+        UsuarioModel user = interfaceService.findUser((long) id);
         user.setName(newName);
         user.setLastName(newLastName);
         user.setPhotoUrl(newPhotoUrl);
         user.setDateOfBirth(newDateOfBirth);
-
-        user.setPhoneNumber(newPhoneNumber);
-
         return user;
     }
 
@@ -84,14 +81,14 @@ public class AppRestController {
     }
 
     @DeleteMapping("/borrar/experiencia/{id}")
-    public String removeExperience(@RequestBody int id) {
+    public String removeExperience(@PathVariable("id") int id) {
         interfaceService.removeExperience(id);
         return "La experiencia fué eliminada";
     }
 
     @PutMapping("/editar/experiencia/{id}")
     public ExperienciaModel editExperience(@PathVariable int id,
-            @RequestParam("postition") String newPosition,
+            @RequestParam("position") String newPosition,
             @RequestParam("startDate") String newStartDate,
             @RequestParam("endDate") String newEndDate,
             @RequestParam("photoUrl") String newPhotoUrl) {
@@ -120,12 +117,12 @@ public class AppRestController {
     }
 
     @DeleteMapping("/borrar/educacion/{id}")
-    public String removeEducacion(@RequestBody int id) {
+    public String removeEducacion(@PathVariable("id") int id) {
         interfaceService.removeEducacion(id);
         return "Se eliminó correctamente";
     }
 
-    @PutMapping("/editar/educacion{id}")
+    @PutMapping("/editar/educacion/{id}")
     public EducacionModel editEducacion(@PathVariable int id,
             @RequestParam("nameCertification") String newNameCertification,
             @RequestParam("expeditionDate") String newExpeditionDate,
@@ -154,7 +151,7 @@ public class AppRestController {
     }
 
     @DeleteMapping("/borrar/habilidad/{id}")
-    public String removeHabilidad(@RequestBody int id) {
+    public String removeHabilidad(@PathVariable int id) {
         interfaceService.removeHabilidad(id);
         return "Se eliminó correctamente";
     }

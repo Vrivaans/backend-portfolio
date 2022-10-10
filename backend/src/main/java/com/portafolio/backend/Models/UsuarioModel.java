@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,56 +15,44 @@ import lombok.Setter;
 @Entity
 public class UsuarioModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    private String emailAddress;
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    // private String emailAddress;
+    // private String password;
+    @NotNull
+    @Size(min = 1, max = 50, message = "Tenga en cuenta que la cantidad de caracteres debe ser entre 1 a 50")
     private String name;
+    @NotNull
+    @Size(min = 1, max = 50, message = "Tenga en cuenta que la cantidad de caracteres debe ser entre 1 a 50")
     private String lastName;
+    @NotNull
+    @Size(min = 1, max = 256, message = "Tenga en cuenta que la cantidad de caracteres debe ser entre 1 a 256")
     private String photoUrl;
+    @NotNull
+    @Size(min = 1, max = 15, message = "Tenga en cuenta que la cantidad de caracteres debe ser entre 1 a 15")
     private String dateOfBirth;
-
-    private int phoneNumber;
-    private Boolean loginStatus;
+    // private int phoneNumber;
+    // private Boolean loginStatus;
 
     public UsuarioModel() {
     }
 
-    public UsuarioModel(String emailAddress, String password, String name, String lastName, String photoUrl,
-            String dateOfBirth, int phoneNumber, Boolean loginStatus) {
-        this.emailAddress = emailAddress;
-        this.password = password;
+    public UsuarioModel(String name, String lastName, String photoUrl,
+            String dateOfBirth) {
+
         this.name = name;
         this.lastName = lastName;
         this.photoUrl = photoUrl;
         this.dateOfBirth = dateOfBirth;
 
-        this.phoneNumber = phoneNumber;
-        this.loginStatus = loginStatus;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -95,22 +85,6 @@ public class UsuarioModel {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Boolean getLoginStatus() {
-        return loginStatus;
-    }
-
-    public void setLoginStatus(Boolean loginStatus) {
-        this.loginStatus = loginStatus;
     }
 
 }

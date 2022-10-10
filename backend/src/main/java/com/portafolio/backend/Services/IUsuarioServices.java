@@ -9,16 +9,16 @@ import com.portafolio.backend.Models.UsuarioModel;
 
 public interface IUsuarioServices {
     // Quiero obtener solo los datos de un usuario, el que use
-    public List<UsuarioModel> getUsers();
+    // public List<UsuarioModel> getUsers(Long id);
 
     // Para guardar los datos de un usuario
     public void savePersona(UsuarioModel user);
 
     // Borrar los datos de un usuario
-    public void deletePersona(int id);
+    public void deletePersona(Long id);
 
     // Por si se necesita
-    public UsuarioModel findUser(int id);
+    public UsuarioModel findUser(Long id);
 
     // --------------------------------------------------------------------------------------------------------------
     // Acá quiero obtener los datos del trabajo del usuario
