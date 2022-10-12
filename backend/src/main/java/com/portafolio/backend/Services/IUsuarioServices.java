@@ -1,6 +1,7 @@
 package com.portafolio.backend.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
@@ -24,6 +25,11 @@ public interface IUsuarioServices {
     // Acá quiero obtener los datos del trabajo del usuario
     public List<ExperienciaModel> getExperiencias();
 
+    // Consultar si existe la experiencia
+    public boolean existsById(int id);
+
+    public Optional<ExperienciaModel> getId(int id);
+
     // Añadir nueva experiencia
     public void addExperience(ExperienciaModel experience);
 
@@ -36,6 +42,12 @@ public interface IUsuarioServices {
     // ---------------------------------------------------------------------------------------------------------------
     // Acá quiero obtener los datos de la educación
     public List<EducacionModel> getEducacion();
+
+    // Consultar si existe el Id en la tabla de educacion
+    public boolean existsEducationById(int id);
+
+    // Obtener Id de la educacion
+    public Optional<EducacionModel> getEducationById(int id);
 
     // Añadir nueva educacion
     public void addEducacion(EducacionModel educacion);

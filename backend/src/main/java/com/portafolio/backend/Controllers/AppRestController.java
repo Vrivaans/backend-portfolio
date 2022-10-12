@@ -6,9 +6,12 @@ import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
 import com.portafolio.backend.Models.HabilidadesModel;
 import com.portafolio.backend.Models.UsuarioModel;
+import com.portafolio.backend.Security.Controller.Mensaje;
 import com.portafolio.backend.Services.IUsuarioServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,6 +77,25 @@ public class AppRestController {
         return interfaceService.getExperiencias();
     }
 
+    /**
+     * Esto es tomado de otro ejemplo para usarlo de guía
+     * @GetMapping("/detail/{id}")
+     * public ResponseEntity<Experiencia> getById(@PathVariable("id") int id){
+     * if(!sExperiencia.existsById(id))
+     * return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+     * Experiencia experiencia = sExperiencia.getOne(id).get();
+     * return new ResponseEntity(experiencia, HttpStatus.OK);
+     * }
+     */
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<ExperienciaModel> getById(@PathVariable("id") int id) {
+        if (!interfaceService.existsById(id)) {
+            return new ResponseEntity(new Mensaje("El id seleccionado no existe"), HttpStatus.NOT_FOUND);
+        }
+        ExperienciaModel experience = interfaceService.getId(id).get();
+        return new ResponseEntity(experience, HttpStatus.OK);
+    }
+
     @PostMapping("/crear/experiencia")
     public String createExperience(@RequestBody ExperienciaModel experience) {
         interfaceService.addExperience(experience);
@@ -108,6 +130,15 @@ public class AppRestController {
     @GetMapping("/traer/educacion")
     public List<EducacionModel> getEducacion() {
         return interfaceService.getEducacion();
+    }
+
+    @GetMapping("/educacion/detail/{id}")
+    public ResponseEntity<EducacionModel> getEducationById(@PathVariable("id") int id) {
+        if (!interfaceService.existsEducationById(id)) {
+            return new ResponseEntity(new Mensaje("El id seleccionado no existe"), HttpStatus.NOT_FOUND);
+        }
+        EducacionModel educacion = interfaceService.getEducationById(id).get();
+        return new ResponseEntity(educacion, HttpStatus.OK);
     }
 
     @PostMapping("/crear/educacion")

@@ -1,6 +1,7 @@
 package com.portafolio.backend.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -63,6 +64,14 @@ public class UsuarioServices implements IUsuarioServices {
         return listaExperiencie;
     }
 
+    public boolean existsById(int id) {
+        return experienciaRepository.existsById(id);
+    }
+
+    public Optional<ExperienciaModel> getId(int id) {
+        return experienciaRepository.findById(id);
+    }
+
     @Override
     public void addExperience(ExperienciaModel experience) {
         experienciaRepository.save(experience);
@@ -84,6 +93,15 @@ public class UsuarioServices implements IUsuarioServices {
     public List<EducacionModel> getEducacion() {
         List<EducacionModel> listaEducacion = educacionRepository.findAll();
         return listaEducacion;
+    }
+
+    @Override
+    public boolean existsEducationById(int id) {
+        return educacionRepository.existsById(id);
+    }
+
+    public Optional<EducacionModel> getEducationById(int id) {
+        return educacionRepository.findById(id);
     }
 
     @Override
