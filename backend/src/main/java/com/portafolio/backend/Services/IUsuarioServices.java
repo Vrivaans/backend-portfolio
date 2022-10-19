@@ -62,6 +62,12 @@ public interface IUsuarioServices {
     // Acá quiero obtener los datos de las habilidades
     public List<HabilidadesModel> getHabilidades();
 
+    // Consultar si existe la habilidad
+    public boolean existsHabilidadById(int id);
+
+    // public Optional<EducacionModel> getEducationById(int id);
+    public Optional<HabilidadesModel> getHabilidadById(int id);
+
     // Añadir nueva habilidad
     public void addHabilidades(HabilidadesModel habilidad);
 

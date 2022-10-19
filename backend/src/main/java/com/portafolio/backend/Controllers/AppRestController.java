@@ -175,6 +175,16 @@ public class AppRestController {
         return interfaceService.getHabilidades();
     }
 
+    // Espacio para hacer el GET del ID
+    @GetMapping("/habilidad/detail/{id}")
+    public ResponseEntity<HabilidadesModel> getHabilidadById(@PathVariable("id") int id) {
+        if (!interfaceService.existsHabilidadById(id)) {
+            return new ResponseEntity(new Mensaje("El id seleccionado no existe"), HttpStatus.NOT_FOUND);
+        }
+        HabilidadesModel habilidad = interfaceService.getHabilidadById(id).get();
+        return new ResponseEntity(habilidad, HttpStatus.OK);
+    }
+
     @PostMapping("/crear/habilidad")
     public String createHabilidad(@RequestBody HabilidadesModel habilidad) {
         interfaceService.addHabilidades(habilidad);

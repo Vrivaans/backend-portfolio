@@ -128,6 +128,16 @@ public class UsuarioServices implements IUsuarioServices {
     }
 
     @Override
+    public boolean existsHabilidadById(int id) {
+        return habilidadRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<HabilidadesModel> getHabilidadById(int id) {
+        return habilidadRepository.findById(id);
+    }
+
+    @Override
     public void addHabilidades(HabilidadesModel habilidad) {
         habilidadRepository.save(habilidad);
     }
