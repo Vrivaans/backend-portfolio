@@ -3,6 +3,7 @@ package com.portafolio.backend.Services;
 import java.util.List;
 import java.util.Optional;
 
+import com.portafolio.backend.Models.DescripcionModel;
 import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
 import com.portafolio.backend.Models.HabilidadesModel;
@@ -78,4 +79,19 @@ public interface IUsuarioServices {
     public HabilidadesModel findHabilidad(int id);
 
     // ---------------------------------------------------------------------------------------------------------------
+
+    public void saveDescripcion(DescripcionModel descripcion);
+
+    // public void addDescripcion(DescripcionModel descripcion);
+
+    // Borrar los datos de un usuario
+    public void deleteDescripcion(int id);
+
+    public boolean existsDescriptById(int id);
+
+    public Optional<DescripcionModel> getDescriptId(int id);
+
+    // Por si se necesita
+    public DescripcionModel findDescripcion(int id);
+
 }

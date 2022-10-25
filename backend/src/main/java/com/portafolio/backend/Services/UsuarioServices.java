@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.portafolio.backend.Models.DescripcionModel;
 import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
 import com.portafolio.backend.Models.HabilidadesModel;
 import com.portafolio.backend.Models.UsuarioModel;
+import com.portafolio.backend.Repository.DescripcionRepository;
 import com.portafolio.backend.Repository.EducacionRepository;
 import com.portafolio.backend.Repository.ExperienciaRepository;
 import com.portafolio.backend.Repository.HabilidadesRepository;
@@ -32,6 +34,9 @@ public class UsuarioServices implements IUsuarioServices {
 
     @Autowired
     private ExperienciaRepository experienciaRepository;
+
+    @Autowired
+    private DescripcionRepository descripcionRepository;;
 
     // @Override
     // public List<UsuarioModel> getUsers() {
@@ -151,6 +156,36 @@ public class UsuarioServices implements IUsuarioServices {
     public HabilidadesModel findHabilidad(int id) {
         HabilidadesModel habilidad = habilidadRepository.findById(id).orElse(null);
         return habilidad;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void saveDescripcion(DescripcionModel descripcion) {
+        descripcionRepository.save(descripcion);
+    }
+
+    @Override
+    public void deleteDescripcion(int id) {
+        descripcionRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean existsDescriptById(int id) {
+
+        return descripcionRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<DescripcionModel> getDescriptId(int id) {
+
+        return descripcionRepository.findById(id);
+    }
+
+    @Override
+    public DescripcionModel findDescripcion(int id) {
+        DescripcionModel descripcion = descripcionRepository.findById(id).orElse(null);
+        return descripcion;
     }
 
 }

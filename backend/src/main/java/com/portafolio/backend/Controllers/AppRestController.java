@@ -2,6 +2,7 @@ package com.portafolio.backend.Controllers;
 
 import java.util.List;
 
+import com.portafolio.backend.Models.DescripcionModel;
 import com.portafolio.backend.Models.EducacionModel;
 import com.portafolio.backend.Models.ExperienciaModel;
 import com.portafolio.backend.Models.HabilidadesModel;
@@ -207,5 +208,26 @@ public class AppRestController {
         habilidad.setIconHability(newIconHability);
         habilidad.setPercentageHability(newPercentageHability);
         return habilidad;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------
+    // Controller para la descripcion
+    /*
+     * @GetMapping("/traer/descripcion/")
+     * public DescripcionModel getDescripcion(@RequestBody int id) {
+     * return interfaceService.findDescripcion(id);
+     * }
+     */
+
+    @GetMapping("/traer/descripcion")
+    public DescripcionModel findDescripcion() {
+        return interfaceService.findDescripcion(1);
+    }
+
+    @PutMapping("/editar/descripcion/{id}")
+    public String updateDescripcion(@PathVariable int id, @RequestBody DescripcionModel descripcion) {
+        interfaceService.deleteDescripcion(id);
+        interfaceService.saveDescripcion(descripcion);
+        return "Se actualizó correctamente";
     }
 }
