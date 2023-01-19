@@ -55,7 +55,7 @@ public class UsuarioServices implements IUsuarioServices {
         userRepository.deleteById((long) id);
 
     }
-
+        
     @Override
     public UsuarioModel findUser(Long id) {
         UsuarioModel user = userRepository.findById((long) id).orElse(null);
