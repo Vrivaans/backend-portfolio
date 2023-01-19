@@ -12,7 +12,6 @@
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Dto/JwtDto.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Enums/RolNombre.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Service/RolService.java
-/Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/BackendPortafolioApplication.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Entity/Rol.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Entity/Usuario.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/jwt/JwtProvider.java
@@ -28,5 +27,6 @@
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/Dto/NuevoUsuario.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Security/jwt/JwtTokenFilter.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Models/ExperienciaModel.java
+/Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/BackendPortafolioApplication.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Repository/EducacionRepository.java
 /Users/ivanv/Desktop/Programacion/practicas_inti/portfolio/backend/src/main/java/com/portafolio/backend/Models/UsuarioModel.java

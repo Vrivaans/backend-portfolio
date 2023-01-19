@@ -9,7 +9,6 @@ com/portafolio/backend/Security/Controller/AuthController.class
 com/portafolio/backend/Security/Entity/Rol.class
 com/portafolio/backend/Security/jwt/JwtEntryPoint.class
 com/portafolio/backend/Security/Entity/UsuarioPrincipal.class
-com/portafolio/backend/BackendPortafolioApplication.class
 com/portafolio/backend/Models/EducacionModel.class
 com/portafolio/backend/Repository/DescripcionRepository.class
 com/portafolio/backend/Models/DescripcionModel.class
