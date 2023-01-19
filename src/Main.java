@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-public class BackendPortafolioApplication {
+public class Main {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendPortafolioApplication.class, args);
